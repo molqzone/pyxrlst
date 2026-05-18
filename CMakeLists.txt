@@ -4,9 +4,10 @@ project(pyxrlst LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 set(LIBXR_STATIC_BUILD ON CACHE BOOL "" FORCE)
 set(LIBXR_SYSTEM linux CACHE STRING "" FORCE)
-set(LIBXR_DRIVER linux CACHE STRING "" FORCE)
+set(LIBXR_DRIVER "" CACHE STRING "" FORCE)
 
 find_package(Python COMPONENTS Interpreter Development.Module REQUIRED)
 find_package(pybind11 CONFIG REQUIRED)
@@ -16,6 +17,7 @@ if(NOT UNIX OR APPLE)
 endif()
 
 add_subdirectory(libxr)
+target_include_directories(xr PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/libxr/driver/linux)
 
 pybind11_add_module(pyxrlst MODULE src/bindings.cpp)
 target_include_directories(pyxrlst PRIVATE libxr/src libxr/system/linux)
