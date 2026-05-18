@@ -2,5 +2,6 @@
 /.venv-wsl
 /build
 /dist
+/wheelhouse
 __pycache__/
 *.pyc
