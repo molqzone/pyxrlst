@@ -1,0 +1,33 @@
+[build-system]
+requires = ["scikit-build-core>=0.12", "pybind11>=3.0"]
+build-backend = "scikit_build_core.build"
+
+[project]
+name = "pyxrlst"
+version = "0.1.0"
+description = "Python wrapper for LibXR LinuxSharedTopic"
+requires-python = ">=3.10"
+
+[dependency-groups]
+dev = [
+  "numpy>=1.26",
+  "pybind11>=3.0",
+  "pytest>=8.0",
+  "scikit-build-core>=0.12",
+]
+
+[tool.scikit-build]
+cmake.version = ">=3.12"
+build-dir = "build"
+
+[tool.scikit-build.sdist]
+exclude = [
+  ".venv",
+  ".venv-wsl",
+  "build",
+  "dist",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
